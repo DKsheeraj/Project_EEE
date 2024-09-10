@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ExamEase.com</title>
+
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='volt/assets/img/favicon/apple-touch-icon.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='volt/assets/img/favicon/favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16"  href="{{ url_for('static', filename='volt/assets/img/favicon/favicon-16x16.png') }}">
+<link rel="manifest" href="{{ url_for('static', filename='volt/assets/img/favicon/site.webmanifest') }}">
+
+<!-- Fontawesome -->
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='volt/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
+
+<!-- Volt CSS -->
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='volt/css/volt.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.7/sweetalert2.min.js" integrity="sha512-IHQXMp2ha/aGMPumvzKLQEs9OrPhIOaEXxQGV5vnysMtEmNNcmUqk82ywqw7IbbvrzP5R3Hormh60UVDBB98yg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.7/sweetalert2.all.js" integrity="sha512-uRc/2ZGOQYtxuR4Uoq8K13eLYuGFWyW3P/U8/qI2wP3BuHQxFhuoiEreDpC80/L6HbPM5IhAVKgK8l7lWwyJkw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.7/sweetalert2.all.min.js" integrity="sha512-S8dy60Ic3uMzmNBB0ocD0TaIBdciM2JLjG2ZRaOhjNwYYO6I1aeRg/mY+T/x4WSx9oh42HvqHB0c7aK3d17Qog==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.7/sweetalert2.css" integrity="sha512-3Mf7x3QC98zKhMBTTGj5fDu2wQE9bgC/MmyFLRuyUTWZRWM4txPrzVfWqrCOWs9Il79iEw5T6+N7fbXXSUafrQ==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.7/sweetalert2.js" integrity="sha512-/2LAWgYlRv0SU4+anDImXAEXGumWtSgZEpRkr6NJ7ehenRBRhWjpJx350BLc+ddOy024/vLjI6ymeDmfAuqPdQ==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.7/sweetalert2.min.css" integrity="sha512-qZl4JQ3EiQuvTo3ccVPELbEdBQToJs6T40BSBYHBHGJUpf2f7J4DuOIRzREH9v8OguLY3SgFHULfF+Kf4wGRxw==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+
+
+<link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    ::after,
+    ::before {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    li {
+        list-style: none;
+    }
+    
+    h1 {
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .wrapper {
+        display: flex;
+    }
+    
+    .main {
+        min-height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        transition: all 0.35s ease-in-out;
+        background-color: #fafbfe;
+    }
+    
+    #sidebar {
+        width: 300px;
+        min-width: 260px;
+        z-index: 1000;
+        transition: all .25s ease-in-out;
+        background-color: #0e2238;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+    
+    #sidebar.expand {
+        width: 300px;
+        min-width: 300px;
+    }
+    
+    .toggle-btn {
+        background-color: transparent;
+        cursor: pointer;
+        border: 0;
+        padding: 1rem 1.5rem;
+    }
+    
+    .toggle-btn i {
+        font-size: 1.5rem;
+        color: #FFF;
+    }
+    
+    .sidebar-logo {
+        margin: auto 0;
+    }
+    
+    .sidebar-logo a {
+        color: #FFF;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+    
+    #sidebar:not(.expand) .sidebar-logo,
+    #sidebar:not(.expand) a.sidebar-link span {
+        
+    }
+    
+    .sidebar-nav {
+        padding: 2rem 0;
+        flex: 1 1 auto;
+    }
+    
+    a.sidebar-link {
+        padding: .625rem 1.625rem;
+        color: #FFF;
+        display: block;
+        font-size: 0.9rem;
+        white-space: nowrap;
+        border-left: 3px solid transparent;
+    }
+    
+    .sidebar-link i {
+        font-size: 1.1rem;
+        margin-right: .75rem;
+    }
+    
+    a.sidebar-link:hover {
+        background-color: rgba(255, 255, 255, .075);
+        border-left: 3px solid #3b7ddd;
+    }
+    
+    .sidebar-item {
+        position: relative;
+    }
+    
+    #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+        position: absolute;
+        top: 0;
+        left: 70px;
+        background-color: #0e2238;
+        padding: 0;
+        min-width: 15rem;
+        display: none;
+    }
+    
+    #sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+        display: block;
+        max-height: 15em;
+        width: 100%;
+        opacity: 1;
+    }
+    
+    #sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+        border: solid;
+        border-width: 0 .075rem .075rem 0;
+        content: "";
+        display: inline-block;
+        padding: 2px;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.4rem;
+        transform: rotate(-135deg);
+        transition: all .2s ease-out;
+    }
+    
+    #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+        transform: rotate(45deg);
+        transition: all .2s ease-out;
+    }
+</style>
+
+
+
+{% block head %}{% endblock %}
+  </head>
+  <body>
+    <script type="text/javascript">
+        window.addEventListener('selectstart', function(e){ e.preventDefault(); });
+          $(document).ready(function () {
+              //Disable cut copy paste
+              $('body').bind('select cut copy paste', function (e) {
+                  e.preventDefault();
+              });
+              
+              //Disable mouse right click
+              $("body").on("contextmenu",function(e){
+                  return false;
+              });
+          });
+          /** TO DISABLE SCREEN CAPTURE **/
+  document.addEventListener('keyup', (e) => {
+      if (e.key == 'PrintScreen') {
+          navigator.clipboard.writeText('');
+          alert('Screenshots disabled!');
+      }
+  });
+  
+  /** TO DISABLE PRINTS WHIT CTRL+P **/
+  document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key == 'p') {
+          alert('This section is not allowed to print or export to PDF');
+          e.cancelBubble = true;
+          e.preventDefault();
+          e.stopImmediatePropagation();
+      }
+  });
+  
+  function funLogout () {
+  
+  swal.fire({
+    title: 'Are you sure?',
+    text: "Do you really want to logout?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No!',
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#202124',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+                $.ajax({
+                      type: "POST",
+                      url: "/logout",
+                      success: function(response){
+                        if(response=="success")
+                        {
+                        console.log(response);
+      window.location.href = "/";
+                        }
+  }
+                  });  
+        
+    } else if (
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+    }
+  })
+  }
+  
+  function funStartExam()
+  {
+    Swal.fire({
+    title: '<strong>BEFORE EXAM LOGIN RULES</strong>',
+    icon: 'warning',
+    html:
+      '<h5>ONLINE EXAM RULES TO BE FOLLOWED STRICTLY</h5>, ' +
+      '<ol><li>Dont minimize the window it will be monitored.</li><li>Check that your camera is proper.</li><li>Dont try to use mobile or any other material it will be monitored and strict action will be taken.</li><li>Use calculator which is given by our system not from your laptop/desktop/mobile.</li><li>Dont use incognito browser & also check that your cookies are enabled.</li><li>Any problem occurs call directly to customer care +91 9320907041 or care@narenderkeswani.com.</li></ol>',
+    showCloseButton: false,
+    showCancelButton: false,
+    focusConfirm: true,
+    confirmButtonColor: '#202124',
+    confirmButtonText:
+      'OK, BEGIN EXAM!',
+    confirmButtonAriaLabel: 'We are abide by rules!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "/give-test";
+    }
+  })
+  }
+  </script>
+    
+<div class="wrapper">
+  <aside id="sidebar">
+      <div class="d-flex">
+          <button class="toggle-btn" type="button">
+              <i class="lni lni-grid-alt"></i>
+          </button>
+          <div class="sidebar-logo">
+              <a href="#">ExamEase</a>
+          </div>
+      </div>
+      <ul class="sidebar-nav">
+          
+          <li class="sidebar-item">
+              <a href="/create-test" class="sidebar-link">
+                  <i class="lni lni-agenda"></i>
+                  <span>New Exam</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+              <a href="/viewquestions" class="sidebar-link">
+                  <i class="lni lni-enter"></i>
+                  <span>View Questions</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/updatetidlist" class="sidebar-link">
+                <i class="lni lni-write"></i>
+                <span>Update Questions</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="/deltidlist" class="sidebar-link">
+                <i class="lni lni-enter"></i>
+                <span>Delete Questions</span>
+            </a>
+        </li>
+          <li class="sidebar-item">
+              <a href="/{{session.email}}/student_test_history" class="sidebar-link">
+                  <i class="lni lni-layout"></i>
+                  <span>History</span>
+              </a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/viewstudentslogs" class="sidebar-link">
+                <i class="lni lni-arrow-right-circle"></i>
+                <span>Student Monitoring</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="/viewstudentslogs" class="sidebar-link">
+                <i class="lni lni-folder"></i>
+                <span>Update Marks</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="/viewstudentslogs" class="sidebar-link">
+                <i class="lni lni-share"></i>
+                <span>Publish Result</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="/viewstudentslogs" class="sidebar-link">
+                <i class="lni lni-protection"></i>
+                <span>Result</span>
+            </a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+          <a href="#" class="sidebar-link" onclick = "return funLogout()">
+              <i class="lni lni-exit"></i>
+              <span>Logout</span>
+          </a>
+      </div>
+  </aside>
+  {% block body %}{% endblock %}
+  {% block content %}{% endblock %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+  crossorigin="anonymous"></script>
+<script>
+    const hamBurger = document.querySelector(".toggle-btn");
+
+hamBurger.addEventListener("click", function () {
+  document.querySelector("#sidebar").classList.toggle("expand");
+});
+</script>
+    
+    <script>
+
+
+</script>
+
+ <!-- Core -->
+ <script src="{{ url_for('static', filename='volt/vendor/@popperjs/core/dist/umd/popper.min.js') }}"></script>
+ <script src="{{ url_for('static', filename='volt/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+ 
+ <!-- Vendor JS -->
+ <script src="{{ url_for('static', filename='volt/vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>
+ 
+ <!-- Slider -->
+ <script src="{{ url_for('static', filename='volt/vendor/nouislider/distribute/nouislider.min.js') }}"></script>
+ 
+ <!-- Smooth scroll -->
+ <script src="{{ url_for('static', filename='volt/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
+ 
+ <!-- Charts -->
+ <script src="{{ url_for('static', filename='volt/vendor/chartist/dist/chartist.min.js') }}"></script>
+ <script src="{{ url_for('static', filename='volt/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
+ 
+ <!-- Datepicker -->
+ <script src="{{ url_for('static', filename='volt/vendor/vanillajs-datepicker/dist/js/datepicker.min.js') }}"></script>
+ 
+ <!-- Sweet Alerts 2 -->
+ <script src="{{ url_for('static', filename='volt/vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+ 
+ <!-- Moment JS -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+ 
+ <!-- Vanilla JS Datepicker -->
+ <script src="{{ url_for('static', filename='volt/vendor/vanillajs-datepicker/dist/js/datepicker.min.js') }}"></script>
+ 
+ <!-- Notyf -->
+ <script src="{{ url_for('static', filename='volt/vendor/notyf/notyf.min.js') }}"></script>
+ 
+ <!-- Simplebar -->
+ <script src="{{ url_for('static', filename='volt/vendor/simplebar/dist/simplebar.min.js') }}"></script>
+ 
+ <!-- Github buttons -->
+ <script async defer src="https://buttons.github.io/buttons.js"></script>
+ 
+ <!-- Volt JS -->
+ <script src="{{ url_for('static', filename='volt/assets/js/volt.js') }}"></script>
+
+</body>
+</html>
